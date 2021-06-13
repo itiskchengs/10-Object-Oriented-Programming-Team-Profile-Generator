@@ -4,6 +4,9 @@ const inquirer = require('inquirer');
 //File systems
 const fs = require('fs');
 const internal = require('stream');
+const Manager = require('./lib/manager');
+const Engineer = require('./lib/engineer');
+const Intern = require('./lib/intern');
 
 //Create empty arrays to store the objects that the requires give back
 //team members array
@@ -37,10 +40,13 @@ const runApp = function () {
                 message: 'What is the team managers office number?'
             },
         ])
-            .then((mangerData) => {
-                //Run a constructor function once built out
-                teamMembers.push(mangerData);
-                teamMembersId.push(mangerData.managerId);
+            .then(({managerName, managerId, managerEmail, managerOfficeNumber}) => {
+                //const {managerName, managerId, managerEmail, managerOfficeNumber} = mangerData
+                const manager = new Manager(managerName, managerId, managerEmail, managerOfficeNumber);
+                teamMembers.push(manager);
+                console.log(manager);
+                console.log(manager.getRole());
+                teamMembersId.push(managerId);
                 addMember();
             })
     }
@@ -56,6 +62,7 @@ const runApp = function () {
                 name: 'engineerId',
                 type: 'input',
                 message: 'What is the engineers ID?',
+                validate: checkId,
             },
             {
                 name: 'engineerEmail',
@@ -68,10 +75,11 @@ const runApp = function () {
                 message: 'What is the GitHub username?'
             },
         ])
-            .then((engineerData) => {
-                //Run a constructor function once built out
-                teamMembers.push(engineerData);
-                teamMembersId.push(engineerData.engineerId);
+            .then(({engineerName, engineerId, engineerEmail, engineerGithub}) => {
+                const engineer = new Engineer(engineerName, engineerId, engineerEmail, engineerGithub);
+                teamMembers.push(engineer);
+                console.log(teamMembers);
+                teamMembersId.push(engineerId);
                 addMember();
             })
     }
@@ -85,7 +93,8 @@ const runApp = function () {
             {
                 name: 'internId',
                 type: 'input',
-                message: 'What is the interns Id?'
+                message: 'What is the interns Id?',
+                validate: checkId,
             },
             {
                 name: 'internEmail',
@@ -98,10 +107,12 @@ const runApp = function () {
                 message: 'What is the interns school?'
             },
         ])
-            .then((internData) => {
-                //Run a constructor function once built out
-                teamMembers.push(internData);
-                teamMembersId.push(internData.internId);
+            .then(({internName, internId, internEmail, internSchool}) => {
+                const intern = new Intern(internName, internId, internEmail, internSchool);
+                teamMembers.push(intern);
+                console.log(teamMembers);
+                console.log(intern.getName());
+                teamMembersId.push(internId);
                 addMember();
             })
     }
@@ -131,28 +142,22 @@ const runApp = function () {
             console.log('Success');
         });
     }
+    const checkId = function(input) {
+        const checkingId = teamMembersId.find(id => id === input)
+        if(checkingId){
+            return 'This id has already been taken. Try another.';
+        }else{
+            return true;
+        }
+    }
     //Runs the manager function
     manager();
 }
 //Runs the app when you run node.
 runApp();
 
+//Export data out 
 
-/*
-
-const hello = function(data ,nextQuestion){
-    inquirer.prompt([
-        {
-            name: `githubUsername`,
-            type: 'input',
-            message: `What is your ${nextQuestion}`,
-        },
-    ])
-.then(({managerName}) => {
-    console.log(data);
-})
-}
-*/
 
 //Create empty arrays for team member and for team id - DONE
 //Create the runapp function that will have all the other functions insde of it. - DONE
