@@ -7,6 +7,7 @@ const internal = require('stream');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
+const {generateFull, htmlHead, addInformation} = require('./dist/html-template');
 
 //Create empty arrays to store the objects that the requires give back
 //team members array
@@ -41,7 +42,6 @@ const runApp = function () {
             },
         ])
             .then(({managerName, managerId, managerEmail, managerOfficeNumber}) => {
-                //const {managerName, managerId, managerEmail, managerOfficeNumber} = mangerData
                 const manager = new Manager(managerName, managerId, managerEmail, managerOfficeNumber);
                 teamMembers.push(manager);
                 console.log(manager);
@@ -132,12 +132,12 @@ const runApp = function () {
                     intern();
                 } else {
                     //This will where if you dont want to add anymore members then you run this function which will write the html file
-                    writeHtml('output.html',teamMembers);
+                    writeHtml();
                 }
             })
     }
-    const writeHtml = function(fileName, data){
-        fs.writeFile(fileName, generateMarkdown(data), (err) => {
+    const writeHtml = function(){
+        fs.writeFile('src/output.html', generateFull(teamMembers), (err) => {
             if(err) throw err;
             console.log('Success');
         });

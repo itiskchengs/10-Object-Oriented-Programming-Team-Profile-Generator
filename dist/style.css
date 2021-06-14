@@ -1,0 +1,104 @@
+/*=========================
+    ROOT COLORS
+=========================*/
+/*Setting up */
+:root{
+    --background: #BEE3DB;
+    --morning-blue: #89B0AE;
+    --independence: #555B6E;
+    --offwhite: #FAF9F9;
+    --apricot: #FFD6BA;
+}
+/*=========================
+    GENERAL STYLES
+=========================*/
+
+/*This set 1 rem to 10px instead of it being 16px so now 1.6 rem is now 16px*/
+html{
+    font-size: 62.5%;
+}
+/*Setting up the h1 - h6 tags with the font-sizes*/
+h1 {
+    font-size: 4rem;
+    font-weight: 800;
+}
+  
+h2 {
+    font-size: 3.5rem;
+}
+  
+h3 {
+    font-size: 3rem;
+}
+  
+h4 {
+    font-size: 2.5rem;
+}
+  
+h5 {
+    font-size: 2rem;
+}
+  
+h6 {
+    font-size: 1.5rem;
+} 
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Open Sans';
+}
+p {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    font-family: 'Open Sans';
+    font-weight: 300;
+}
+
+/*=========================
+    HEADER CSS CHANGES
+=========================*/
+
+.header-container{
+    background-color: var(--morning-blue);
+    padding: 5rem 0rem;
+    max-width: 100%;
+}
+.header-container h1{
+    color: var(--offwhite);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+/*=========================
+    HEADER CSS CHANGES
+=========================*/
+.team-container{
+    margin-top: 5rem;
+}
+.card-container{
+    margin-left: auto;
+    margin-right:auto;
+    padding-bottom: 5rem;
+}
+.card{
+    background-color: var(--background);  
+}
+.card-title{
+    background-color: var(--apricot);
+    color: var(--offwhite);
+    text-transform: uppercase;
+    padding: 1rem
+} 
+.card-title h4{
+    text-transform: uppercase;
+} 
+.card-title h5{
+    text-transform: uppercase;
+}
+.card-body{
+    background-color: var(--background);
+    margin:0;
+    padding:1.5rem;
+}
+.card-body p{
+    font-size: 1.4rem;
+}
